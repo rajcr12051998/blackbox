@@ -95,7 +95,7 @@ func matchCelExpressions(ctx context.Context, reader io.Reader, httpConfig confi
 			return false
 		}
 		if result.Type() == cel.BoolType && result.Value().(bool) {
-			level.Error(logger).Log("msg", "Body matched CEL expression", "expression", httpConfig.FailIfBodyJSONMatchesCel)
+			level.Error(logger).Log("msg", "Body matched CEL expression", "expression", httpConfig.FailIfBodyJSONMatchesCel.Expression)
 			return false
 		}
 	}
@@ -111,7 +111,7 @@ func matchCelExpressions(ctx context.Context, reader io.Reader, httpConfig confi
 			return false
 		}
 		if result.Type() == cel.BoolType && !result.Value().(bool) {
-			level.Error(logger).Log("msg", "Body did not match CEL expression", "expression", httpConfig.FailIfBodyJSONNotMatchesCel)
+			level.Error(logger).Log("msg", "Body did not match CEL expression", "expression", httpConfig.FailIfBodyJSONNotMatchesCel.Expression)
 			return false
 		}
 	}
